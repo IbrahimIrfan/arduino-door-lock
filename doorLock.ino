@@ -14,14 +14,14 @@ void setup() {
 
 void loop() {
   myServo.write(0);
-  lightReading = digitalRead(lightPin);
-  if (lightReading) {
+  lightReading = analogRead(lightPin);
+  if (lightReading > 650) { // light on
     delay(1000);
-    lightReading = digitalRead(lightPin);
-    if (lightReading == 0){
+    lightReading = analogRead(lightPin);
+    if (lightReading <= 650){ // turn off light
       delay(500);
-      lightReading = digitalRead(lightPin);
-      if (lightReading){
+      lightReading = analogRead(lightPin);
+      if (lightReading > 650){ // light on
         myServo.write(180);
       }
     }
